@@ -1,0 +1,17 @@
+
+services:
+  ai-agent:
+    image: ai-agent-cli
+    container_name: ai-agent-cli
+    env_file:
+      - .env
+    networks:
+      - ai-network
+    volumes:
+      - ./workspace:/workspace
+    stdin_open: true
+    tty: true
+
+networks:
+  ai-network:
+    external: true
