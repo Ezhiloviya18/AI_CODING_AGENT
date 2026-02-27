@@ -1,0 +1,34 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "provider": {
+    "vllm": {
+      "name": "vLLM",
+      "npm": "@ai-sdk/openai-compatible",
+      "env": [],
+      "options": {
+        "baseURL": "http://172.30.140.91:8000/v1",
+        "apiKey": "vllm-qgDSWPGLwcjvq63ApWIiU0sgiKiF5E5nqvGaAcKfh8Q"
+      },
+      "models": {
+        "MiniMax-M2.1-REAP-50-W4A16": {
+          "id": "plezan/MiniMax-M2.1-REAP-50-W4A16",
+          "name": "MiniMax M2.1 REAP 50 W4A16",
+          "tool_call": true,
+          "cost": {
+            "input": 0,
+            "output": 0
+          },
+          "limit": {
+            "context": 30000,
+            "output": 4096
+          }
+        }
+      }
+    }
+  },
+  "model": "vllm/MiniMax-M2.1-REAP-50-W4A16"
+}
+
+
+
+
