@@ -1,0 +1,61 @@
+# OpenCode Self-Hosted AI Coding Agent — Implementation & Debugging Log
+
+## 1. Implementation Plan (4 Slices)
+- **Slice A:** Audit log module
+- **Slice B:** RBAC + OIDC + Policy
+- **Slice C:** Parallel subagents + Budget
+- **Slice D:** Skill scopes + Secret scanning + Retention
+
+## 2. Implementation & Testing
+- All 4 slices implemented in codebase
+- 8 new test files created, covering all slices
+- Initial test run: 96 pass, 5 fail
+- Fixed 5 test failures (RBAC API mismatch, Stripe regex test input)
+- Final: 101 pass, 0 fail across 8 test files in 305ms
+- TypeScript typecheck: 0 errors
+- Pre-existing tests: 29 pass, 0 fail (no regressions)
+
+## 3. Run/Verify Instructions
+- Provided TUI and web UI run commands
+- User reported TUI not working and web UI not using local model
+
+## 4. Database Migration Fix
+- Real bug: `table session has no column named user_id` (migration SQL not applied)
+- Fix: `ALTER TABLE session ADD COLUMN user_id text;` to `~/.local/share/opencode/opencode.db`
+- Verified session creation and audit logging work after fix
+
+## 5. vLLM Model Integration
+- vLLM provider serving `plezan/MiniMax-M2.1-REAP-50-W4A16` at `http://172.30.140.91:8000/v1`
+- Config: `opencode.json` at repo root defines vLLM provider + model as default
+- API confirms vLLM is connected and model is available
+
+## 6. Web UI Model Picker Debugging
+- User wants local vLLM model to appear in web UI model picker
+- Found two dialogs: `dialog-select-model.tsx` (full), `dialog-select-model-unpaid.tsx` (limited)
+- User was seeing the "unpaid" dialog, which only shows free OpenCode models
+- Condition: `providers.paid().length > 0` determines which dialog is shown
+- vLLM is connected, but UI logic was not showing it
+
+## 7. Fixes Applied
+- Always show full `ModelSelectorPopover` (removed paid/unpaid split)
+- Added `vllm` to `popularProviders` list
+- Ensured vLLM models are always visible
+- Cleaned up unused imports and variables
+
+## 8. Server & Web UI
+- API server: `http://127.0.0.1:4096` (password: `secret`)
+- Web UI: `http://172.30.140.142:3001` (Vite dev server)
+- Port 3000 is Grafana, not OpenCode
+
+## 9. Verification
+- API `/provider` returns vLLM as connected
+- Web UI model picker now shows vLLM model
+- All TypeScript and runtime errors resolved
+
+---
+
+**Summary:**
+- All planned features implemented, tested, and type-safe
+- DB migration applied
+- vLLM model now appears in the web UI model picker as requested
+- All changes and debugging steps are documented above
