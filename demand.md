@@ -51,3 +51,7 @@ these are the tasks to be done. Go through my repo and verify how you will do th
 
 
 
+https://chatgpt.com/share/69a44597-0e90-8012-8347-a112d6eb04f9
+
+
+https://chatgpt.com/gg/v/69a445c6576081a0ac37d4f88740b1f8?token=5lC-Cdd9M_BCtveOhivj8w
